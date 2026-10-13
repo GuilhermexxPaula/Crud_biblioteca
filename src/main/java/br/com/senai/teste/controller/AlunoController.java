@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.senai.teste.model.Aluno;
 import br.com.senai.teste.service.AlunoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping ("/alunos")
@@ -25,7 +26,8 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
     @PostMapping 
-    public ResponseEntity<Aluno> cadastrarAluno(@RequestBody Aluno aluno) {
+    public ResponseEntity<Aluno> cadastrarAluno(@Valid @RequestBody  Aluno aluno) {
+
         Aluno alunoCadastrado = alunoService.cadastrarAluno(aluno);
         return new ResponseEntity<>(alunoCadastrado, HttpStatus.CREATED);
     }
@@ -45,7 +47,7 @@ public class AlunoController {
     }
     
     @PutMapping ("/{id}")
-    public ResponseEntity<Aluno> atualizar(@PathVariable int id, @RequestBody Aluno novosDados) {
+    public ResponseEntity<Aluno> atualizar(@PathVariable int id, @Valid @RequestBody Aluno novosDados) {
         final Optional<Aluno> alunoAtualizado = alunoService.atualizarAluno(id, novosDados);
         if (alunoAtualizado.isPresent()) {
             return ResponseEntity.ok(alunoAtualizado.get());

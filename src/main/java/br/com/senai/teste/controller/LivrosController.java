@@ -21,7 +21,9 @@ public class LivrosController {
     public LivrosController(LivroService livroService) {
         this.livroService = livroService;
         
-    }@PostMapping
+    }
+    
+           @PostMapping
     public ResponseEntity<Livro> cadastrarLivro(@RequestBody Livro livro) {
         Livro livroCadastrado = livroService.cadastrarLivro(livro);
         return  ResponseEntity

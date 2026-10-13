@@ -29,32 +29,32 @@ public Livro (String titulo, String autor, int anoPublicacao){
     this.anoPublicacao=anoPublicacao;
 }
 
-public int getid(){
+public int getId(){
     return id;
 }
 
-public String gettitulo(){
+public String getTitulo(){
     return titulo;
 }
 
-public void settitulo(String titulo){
+public void setTitulo(String titulo){
     this.titulo=titulo;
 }
 
 
-public String getautor(){
+public String getAutor(){
     return autor;
 }
 
-public void setautor(String autor){
+public void setAutor(String autor){
     this.autor=autor;
 }
 
-public int getanoPublicacao(){
+public int getAnoPublicacao(){
     return anoPublicacao; 
 }
 
-public void setanoPublicacao(int anoPublicacao){
+public void setAnoPublicacao(int anoPublicacao){
     this.anoPublicacao=anoPublicacao;
 }
 

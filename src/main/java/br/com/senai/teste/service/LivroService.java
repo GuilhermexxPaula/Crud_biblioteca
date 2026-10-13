@@ -29,9 +29,9 @@ public class LivroService {
         Optional<Livro> livroExistente = livroRepository.findById(id);
         if (livroExistente.isPresent()) {
             Livro livro = livroExistente.get();
-            livro.settitulo(novosDados.gettitulo());
-            livro.setautor(novosDados.getautor());
-            livro.setanoPublicacao(novosDados.getanoPublicacao());
+            livro.setTitulo(novosDados.getTitulo());
+            livro.setAutor(novosDados.getAutor());
+            livro.setAnoPublicacao(novosDados.getAnoPublicacao());
             Livro livroAtualizado = livroRepository.save(livro);
             return Optional.of(livroAtualizado);
         } else {
