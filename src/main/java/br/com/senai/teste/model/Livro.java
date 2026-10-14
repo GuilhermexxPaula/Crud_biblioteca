@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;  
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -13,8 +15,11 @@ public class Livro{
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
     private  int id;
+    @NotBlank (message = "O título do livro é obrigatório")
  private String titulo;
+ @NotBlank (message = "O autor do livro é obrigatório")
  private String autor ;
+ @Min (value = 1, message = "O ano de publicação deve ser maior ou igual a zero")
     private int  anoPublicacao;
 
 

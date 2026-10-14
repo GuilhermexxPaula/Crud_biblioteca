@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.senai.teste.model.Livro;
 import br.com.senai.teste.service.LivroService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/livros")
@@ -24,7 +25,7 @@ public class LivrosController {
     }
     
            @PostMapping
-    public ResponseEntity<Livro> cadastrarLivro(@RequestBody Livro livro) {
+    public ResponseEntity<Livro> cadastrarLivro(@Valid @RequestBody Livro livro) {
         Livro livroCadastrado = livroService.cadastrarLivro(livro);
         return  ResponseEntity
         .status(HttpStatus.CREATED)
