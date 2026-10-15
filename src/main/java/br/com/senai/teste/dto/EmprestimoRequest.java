@@ -1,23 +1,23 @@
 package br.com.senai.teste.dto;
 
 public class EmprestimoRequest {
-    private Integer idLivro;
-    private Integer idAluno;
+    private Integer livroId;
+    private Integer alunoId;
 
     public EmprestimoRequest() {
     }
 
-    public Integer getIdLivro() {
-        return idLivro;
+    public Integer getLivroId() {
+        return livroId;
     }
-    public void setIdLivro(Integer idLivro) {
-        this.idLivro = idLivro;
+    public void setIdLivro(Integer livroId) {
+        this.livroId = livroId;
     }
-    public Integer getIdAluno() {
-        return idAluno;
+    public Integer getAlunoId() {
+        return alunoId;
     }
     public void setIdAluno(Integer idAluno) {
-        this.idAluno = idAluno;
+        this.alunoId = alunoId;
     }
 
 }
