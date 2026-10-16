@@ -1,5 +1,7 @@
 package br.com.senai.teste.controller;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -34,11 +36,14 @@ public ResponseEntity<Emprestimo>cadastrar(@RequestBody EmprestimoRequest dados)
     
     Integer alunoId = dados.getAlunoId();
     Integer livroId = dados.getLivroId();
+    LocalDate dataPrevistaDevolucao = dados.getDataPrevistaDevolucao();
 
-    if (alunoId == null || livroId == null) {
+    if (alunoId == null || livroId == null
+        || dataPrevistaDevolucao == null
+    ) {
         return ResponseEntity.badRequest().build();
     }
-    Optional<Emprestimo> emprestimo = emprestimoService.cadastrarEmprestimo(alunoId, livroId);
+    Optional<Emprestimo> emprestimo = emprestimoService.cadastrarEmprestimo(alunoId, livroId, dataPrevistaDevolucao);
 
     if (emprestimo.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -65,5 +70,24 @@ public ResponseEntity<Emprestimo> devolver(@PathVariable Integer id) {
         return ResponseEntity.notFound().build();
     }
 
-}}
+}
+@GetMapping ("/ativos")
+public ResponseEntity<List<Emprestimo>> listarEmprestimosAtivos() {
+    List<Emprestimo> emprestimos = emprestimoService.listarEmprestimosAtivos();
+    return ResponseEntity.ok(emprestimos);
+}
+@GetMapping ("/aluno/{alunoId}")
+public ResponseEntity<List<Emprestimo>> listarPorAluno(@PathVariable Integer alunoId) {
+    List<Emprestimo> emprestimos = emprestimoService.listarPorAluno(alunoId);
+    return ResponseEntity.ok(emprestimos);
+}
+@GetMapping ("/livro/{livroId}")
+public ResponseEntity<List<Emprestimo>> listarPorLivro(@PathVariable Integer livroId) {
+    List<Emprestimo> emprestimos = emprestimoService.listarPorLivro(livroId);
+    return ResponseEntity.ok(emprestimos);
 
+}
+
+
+
+}
