@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import br.com.senai.teste.model.Emprestimo;
 import br.com.senai.teste.service.EmprestimoService;
 import jakarta.persistence.criteria.CriteriaBuilder.In;
+import jakarta.validation.Valid;
 import br.com. senai.teste.dto.EmprestimoRequest;
 
 @RestController
@@ -32,7 +33,7 @@ public class EmprestimoController {
 
     @PostMapping
 
-public ResponseEntity<Emprestimo>cadastrar(@RequestBody EmprestimoRequest dados){
+public ResponseEntity<Emprestimo>cadastrar(@Valid @RequestBody EmprestimoRequest dados){
     
     Integer alunoId = dados.getAlunoId();
     Integer livroId = dados.getLivroId();
@@ -43,7 +44,7 @@ public ResponseEntity<Emprestimo>cadastrar(@RequestBody EmprestimoRequest dados)
     ) {
         return ResponseEntity.badRequest().build();
     }
-    Optional<Emprestimo> emprestimo = emprestimoService.cadastrarEmprestimo(alunoId, livroId, dataPrevistaDevolucao);
+    Optional<Emprestimo> emprestimo = emprestimoService.cadastrar(alunoId, livroId, dataPrevistaDevolucao);
 
     if (emprestimo.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -87,6 +88,17 @@ public ResponseEntity<List<Emprestimo>> listarPorLivro(@PathVariable Integer liv
     return ResponseEntity.ok(emprestimos);
 
 }
+
+
+@GetMapping ("/atrasados")
+public ResponseEntity<List<Emprestimo>> listarEmprestimosAtrasados() {
+    List<Emprestimo> emprestimosAtrasados = emprestimoService.listarEmprestimosAtrasados();
+    return ResponseEntity.ok(emprestimosAtrasados);
+
+
+
+}
+
 
 
 
