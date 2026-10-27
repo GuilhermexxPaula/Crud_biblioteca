@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "emprestimo")
@@ -65,4 +65,22 @@ public LocalDate getDataPrevistaDevolucao() {
 public void setDataPrevistaDevolucao(LocalDate dataPrevistaDevolucao) {
     this.dataPrevistaDevolucao = dataPrevistaDevolucao;
 }
+public String getSituacao(){
+    if (dataDevolucao != null) {
+    return "DEVOLVIDO";
 }
+
+if (dataPrevistaDevolucao == null) {
+    return "SEM_PREVISAO";
+}
+
+if (dataPrevistaDevolucao.isBefore(
+        LocalDate.now())) {
+
+    return "ATRASADO";
+}
+
+return "ATIVO";
+}
+}
+

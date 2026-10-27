@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.PatchMapping;
 
 import br.com.senai.teste.model.Emprestimo;
 import br.com.senai.teste.service.EmprestimoService;
-import jakarta.persistence.criteria.CriteriaBuilder.In;
+import jakarta.persistence.criteria.CriteriaBuilder.*;
 import jakarta.validation.Valid;
 import br.com. senai.teste.dto.EmprestimoRequest;
+import br.com.senai.teste.dto.RenovacaoRequest;
 
 @RestController
 @RequestMapping("/emprestimos")
@@ -97,6 +98,21 @@ public ResponseEntity<List<Emprestimo>> listarEmprestimosAtrasados() {
 
 
 
+}
+@PatchMapping("/{id}/renovacao")
+public ResponseEntity<Emprestimo> renovar(
+        @PathVariable Integer id,
+        @Valid @RequestBody RenovacaoRequest dados) {
+
+    Optional<Emprestimo> emprestimo = emprestimoService.renovar(
+            id,
+            dados.getNovaDataPrevista());
+
+    if (emprestimo.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    return ResponseEntity.ok(emprestimo.get());
 }
 
 
