@@ -110,5 +110,10 @@ public class EmprestimoService {
     return Optional.of(
             emprestimoRepository.save(emprestimo));
 }
+
+public List<Emprestimo> listarTodos() {
+    return emprestimoRepository.findAll();
+}
+
     
 }
